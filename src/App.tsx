@@ -1,5 +1,5 @@
 import React from "react";
-import Event from "./Event.tsx";
+import { Event } from "./Event.tsx";
 
 const TABS: { [key: string]: { title: string; items: object[] } } = {
   all: {
@@ -142,7 +142,7 @@ type Size = {
   height: number;
 };
 
-function Main() {
+export const App = () => {
   const ref = React.useRef<HTMLDivElement>(null);
   const initedRef = React.useRef(false);
   const [activeTab, setActiveTab] = React.useState("");
@@ -348,6 +348,4 @@ function Main() {
       </section>
     </main>
   );
-}
-
-export default Main;
+};

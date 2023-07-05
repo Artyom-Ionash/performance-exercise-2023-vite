@@ -9,7 +9,7 @@ type EventProps = {
   onSize?: any;
 };
 
-function Event(props: EventProps) {
+export const Event = (props: EventProps) => {
   const ref = React.useRef<HTMLLIElement>(null);
 
   const { onSize } = props;
@@ -40,6 +40,4 @@ function Event(props: EventProps) {
       </button>
     </li>
   );
-}
-
-export default Event;
+};

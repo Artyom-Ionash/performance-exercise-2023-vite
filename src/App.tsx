@@ -1,6 +1,5 @@
 import React from "react";
 import Event from "./Event.tsx";
-import "./App.css";
 
 const TABS: { [key: string]: { title: string; items: object[] } } = {
   all: {

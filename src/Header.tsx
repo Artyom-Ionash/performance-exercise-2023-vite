@@ -25,11 +25,11 @@ function Header() {
         </span>
       </button>
       <ul
-        className={
-          "header__links" +
-          (expanded ? " header__links_opened" : "") +
-          (toggled ? " header__links-toggled" : "")
-        }
+        className={[
+          "header__links",
+          expanded ? "header__links_opened" : "",
+          toggled ? "header__links-toggled" : "",
+        ].join(" ")}
       >
         <li className="header__item">
           <a

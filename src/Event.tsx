@@ -23,7 +23,10 @@ function Event(props: EventProps) {
   });
 
   return (
-    <li ref={ref} className={"event" + (props.slim ? " event_slim" : "")}>
+    <li
+      ref={ref}
+      className={["event", props.slim ? "event_slim" : ""].join(" ")}
+    >
       <button className="event__button">
         <span
           className={`event__icon event__icon_${props.icon}`}

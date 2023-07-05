@@ -305,12 +305,12 @@ function Main() {
               <li
                 key={key}
                 role="tab"
-                aria-selected={key === activeTab ? "true" : "false"}
+                aria-selected={key === activeTab ? true : false}
                 tabIndex={key === activeTab ? 0 : undefined}
-                className={
-                  "section__tab" +
-                  (key === activeTab ? " section__tab_active" : "")
-                }
+                className={[
+                  "section__tab",
+                  key === activeTab ? "section__tab_active" : "",
+                ].join(" ")}
                 id={`tab_${key}`}
                 aria-controls={`panel_${key}`}
                 onClick={() => setActiveTab(key)}
@@ -326,10 +326,10 @@ function Main() {
             <div
               key={key}
               role="tabpanel"
-              className={
-                "section__panel" +
-                (key === activeTab ? "" : " section__panel_hidden")
-              }
+              className={[
+                "section__panel",
+                key === activeTab ? "" : "section__panel_hidden",
+              ].join(" ")}
               aria-hidden={key === activeTab ? "false" : "true"}
               id={`panel_${key}`}
               aria-labelledby={`tab_${key}`}

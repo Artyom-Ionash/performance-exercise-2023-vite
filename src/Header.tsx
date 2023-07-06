@@ -3,7 +3,6 @@ import React from "react";
 export const Header = () => {
   const [toggled, setToggled] = React.useState(false);
   const onClick = () => setToggled(!toggled);
-
   return (
     <header className="header">
       <a href="/" className="header__logo" aria-label="Яндекс.Дом"></a>
@@ -19,8 +18,7 @@ export const Header = () => {
       <ul
         className={[
           "header__links",
-          toggled ? "header__links_opened" : "",
-          toggled ? "header__links-toggled" : "",
+          toggled ? "header__links_opened header__links-toggled" : "",
         ].join(" ")}
       >
         <li className="header__item">

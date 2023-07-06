@@ -205,7 +205,7 @@ export const App: React.FC = () => {
               <li
                 key={key}
                 role="tab"
-                aria-selected={key === activeTab ? true : false}
+                aria-selected={key === activeTab}
                 tabIndex={key === activeTab ? 0 : undefined}
                 className={[
                   "section__tab",

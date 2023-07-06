@@ -252,8 +252,7 @@ body {
   padding: 0.4375rem 0.9375rem 0.5rem;
   font-size: 0.8125rem;
   font-weight: bold;
-  background: #f7f7f7;
-  border-radius: 1024px;
+  border-radius: 20px;
   cursor: pointer;
   transition: 0.25s ease-in-out;
   transition-property: background-color, box-shadow;

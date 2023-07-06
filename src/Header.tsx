@@ -1,33 +1,25 @@
 import React from "react";
 
 export const Header = () => {
-  const [expanded, setExpanded] = React.useState(false);
   const [toggled, setToggled] = React.useState(false);
-
-  const onClick = () => {
-    if (!toggled) {
-      setToggled(true);
-    }
-
-    setExpanded(!expanded);
-  };
+  const onClick = () => setToggled(!toggled);
 
   return (
     <header className="header">
       <a href="/" className="header__logo" aria-label="Яндекс.Дом"></a>
       <button
         className="header__menu"
-        aria-expanded={expanded}
+        aria-expanded={toggled}
         onClick={onClick}
       >
         <span className="header__menu-text a11y-hidden">
-          {expanded ? "Закрыть меню" : "Открыть меню"}
+          {toggled ? "Закрыть меню" : "Открыть меню"}
         </span>
       </button>
       <ul
         className={[
           "header__links",
-          expanded ? "header__links_opened" : "",
+          toggled ? "header__links_opened" : "",
           toggled ? "header__links-toggled" : "",
         ].join(" ")}
       >

@@ -152,19 +152,14 @@ export const App = () => {
     }
   });
 
-  const onSelectInput: React.ChangeEventHandler<HTMLSelectElement> = (
-    event
-  ) => {
+  const onSelectInput: React.ChangeEventHandler<HTMLSelectElement> = (event) =>
     setActiveTab(event.target!.value);
-  };
 
-  const sizes: Size[] = [];
+  let sumWidth = 0;
   const onSize = (size: Size) => {
-    sizes.push(size);
+    sumWidth += size.width;
   };
   React.useEffect(() => {
-    const sumWidth = sizes.reduce((acc, item) => acc + item.width, 0);
-
     const newHasRightScroll = sumWidth > ref.current!.offsetWidth;
     if (newHasRightScroll !== hasRightScroll) {
       setHasRightScroll(newHasRightScroll);
@@ -175,12 +170,10 @@ export const App = () => {
     const scroller = ref.current!.querySelector(
       ".section__panel:not(.section__panel_hidden)"
     );
-    if (scroller) {
-      scroller.scrollTo({
-        left: scroller.scrollLeft + 400,
-        behavior: "smooth",
-      });
-    }
+    scroller?.scrollTo({
+      left: scroller.scrollLeft + 400,
+      behavior: "smooth",
+    });
   };
 
   return (

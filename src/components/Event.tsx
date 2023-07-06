@@ -1,24 +1,20 @@
 import React from "react";
 
-type EventProps = {
-  slim?: any;
-  icon?: any;
-  iconLabel?: any;
-  title?: any;
-  subtitle?: any;
+export const Event: React.FC<{
+  icon: any;
+  iconLabel: any;
   onSize?: any;
-};
-
-export const Event = (props: EventProps) => {
+  title: any;
+  subtitle?: any;
+  slim?: any;
+}> = (props) => {
   const ref = React.useRef<HTMLLIElement>(null);
-
-  const { onSize } = props;
 
   React.useEffect(() => {
     const width = ref.current!.offsetWidth;
     const height = ref.current!.offsetHeight;
-    if (onSize) {
-      onSize({ width, height });
+    if (props.onSize) {
+      props.onSize({ width, height });
     }
   });
 

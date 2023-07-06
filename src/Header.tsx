@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Header = () => {
+export const Header: React.FC = () => {
   const [toggled, setToggled] = React.useState(false);
   const onClick = () => setToggled(!toggled);
   return (

@@ -1,59 +1,66 @@
 import React from "react";
 import { Event } from "./Event.tsx";
 
-const TABS: { [key: string]: { title: string; items: object[] } } = {
+type Size = {
+  width: number;
+  height: number;
+};
+
+const TABS = {
   all: {
     title: "Все",
-    items: [
-      {
-        icon: "light2",
-        iconLabel: "Освещение",
-        title: "Xiaomi Yeelight LED Smart Bulb",
-        subtitle: "Включено",
-      },
-      {
-        icon: "light",
-        iconLabel: "Освещение",
-        title: "D-Link Omna 180 Cam",
-        subtitle: "Включится в 17:00",
-      },
-      {
-        icon: "temp",
-        iconLabel: "Температура",
-        title: "Elgato Eve Degree Connected",
-        subtitle: "Выключено до 17:00",
-      },
-      {
-        icon: "light",
-        iconLabel: "Освещение",
-        title: "LIFX Mini Day & Dusk A60 E27",
-        subtitle: "Включится в 17:00",
-      },
-      {
-        icon: "light2",
-        iconLabel: "Освещение",
-        title: "Xiaomi Mi Air Purifier 2S",
-        subtitle: "Включено",
-      },
-      {
-        icon: "light",
-        iconLabel: "Освещение",
-        title: "Philips Zhirui",
-        subtitle: "Включено",
-      },
-      {
-        icon: "light",
-        iconLabel: "Освещение",
-        title: "Philips Zhirui",
-        subtitle: "Включено",
-      },
-      {
-        icon: "light2",
-        iconLabel: "Освещение",
-        title: "Xiaomi Mi Air Purifier 2S",
-        subtitle: "Включено",
-      },
-    ],
+    items: Array(1 << 6)
+      .fill([
+        {
+          icon: "light2",
+          iconLabel: "Освещение",
+          title: "Xiaomi Yeelight LED Smart Bulb",
+          subtitle: "Включено",
+        },
+        {
+          icon: "light",
+          iconLabel: "Освещение",
+          title: "D-Link Omna 180 Cam",
+          subtitle: "Включится в 17:00",
+        },
+        {
+          icon: "temp",
+          iconLabel: "Температура",
+          title: "Elgato Eve Degree Connected",
+          subtitle: "Выключено до 17:00",
+        },
+        {
+          icon: "light",
+          iconLabel: "Освещение",
+          title: "LIFX Mini Day & Dusk A60 E27",
+          subtitle: "Включится в 17:00",
+        },
+        {
+          icon: "light2",
+          iconLabel: "Освещение",
+          title: "Xiaomi Mi Air Purifier 2S",
+          subtitle: "Включено",
+        },
+        {
+          icon: "light",
+          iconLabel: "Освещение",
+          title: "Philips Zhirui",
+          subtitle: "Включено",
+        },
+        {
+          icon: "light",
+          iconLabel: "Освещение",
+          title: "Philips Zhirui",
+          subtitle: "Включено",
+        },
+        {
+          icon: "light2",
+          iconLabel: "Освещение",
+          title: "Xiaomi Mi Air Purifier 2S",
+          subtitle: "Включено",
+        },
+      ])
+      .flat(),
   },
   kitchen: {
     title: "Кухня",
@@ -129,18 +136,8 @@ const TABS: { [key: string]: { title: string; items: object[] } } = {
       },
     ],
   },
-};
-
-for (let i = 0; i < 6; ++i) {
-  TABS.all.items.push(...TABS.all.items);
-}
-
-const TABS_KEYS = Object.keys(TABS);
-
-type Size = {
-  width: number;
-  height: number;
-};
+} as const;
+const TABS_KEYS = Object.keys(TABS) as (keyof typeof TABS)[];
 
 export const App = () => {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -161,11 +158,10 @@ export const App = () => {
     setActiveTab(event.target!.value);
   };
 
-  let sizes: Size[] = [];
+  const sizes: Size[] = [];
   const onSize = (size: Size) => {
-    sizes = [...sizes, size];
+    sizes.push(size);
   };
-
   React.useEffect(() => {
     const sumWidth = sizes.reduce((acc, item) => acc + item.width, 0);
 

@@ -160,9 +160,9 @@ export const Carousel = () => {
     if (isTabKey(value)) setActiveTab(value);
   };
 
-  let sumWidth = 0;
+  let sumWidth = -1;
   const onSize = (width: number) => {
-    sumWidth += width;
+    if (sumWidth === -1) sumWidth = width * TABS[activeTab].items.length;
   };
   React.useEffect(() => {
     const newHasRightScroll = sumWidth > ref.current!.offsetWidth;

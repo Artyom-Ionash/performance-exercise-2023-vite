@@ -132,23 +132,33 @@ const TABS = {
     ],
   },
 } as const;
-const TABS_KEYS = Object.keys(TABS) as (keyof typeof TABS)[];
+type TabKey = keyof typeof TABS;
+const TABS_KEYS = Object.keys(TABS) as TabKey[];
+const isTabKey = (key: string | null): key is TabKey => {
+  if (!key) return false;
+  return key in TABS_KEYS;
+};
 
 export const Carousel = () => {
   const ref = React.useRef<HTMLDivElement>(null);
   const initedRef = React.useRef(false);
-  const [activeTab, setActiveTab] = React.useState("");
+  const [activeTab, setActiveTab] = React.useState<keyof typeof TABS>("all");
   const [hasRightScroll, setHasRightScroll] = React.useState(false);
 
   React.useEffect(() => {
     if (!activeTab && !initedRef.current) {
       initedRef.current = true;
-      setActiveTab(new URLSearchParams(location.search).get("tab") || "all");
+      const param = new URLSearchParams(location.search).get("tab");
+      setActiveTab(isTabKey(param) ? param : "all");
     }
   });
 
-  const onSelectInput: React.ChangeEventHandler<HTMLSelectElement> = (event) =>
-    setActiveTab(event.target!.value);
+  const onSelectInput: React.ChangeEventHandler<HTMLSelectElement> = (
+    event
+  ) => {
+    const value = event.target?.value;
+    if (isTabKey(value)) setActiveTab(value);
+  };
 
   let sumWidth = 0;
   const onSize = (width: number) => {
@@ -162,7 +172,7 @@ export const Carousel = () => {
   });
 
   const onArrowCLick = () => {
-    const scroller = ref.current!.querySelector(
+    const scroller = ref.current?.querySelector(
       ".section__panel:not(.section__panel_hidden)"
     );
     scroller?.scrollTo({

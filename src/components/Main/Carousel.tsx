@@ -132,7 +132,8 @@ const TABS = {
     ],
   },
 } as const;
-const TABS_KEYS = Object.keys(TABS) as (keyof typeof TABS)[];
+type TabKey = keyof typeof TABS;
+const TABS_KEYS = Object.keys(TABS) as TabKey[];
 
 export const Carousel = () => {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -143,7 +144,8 @@ export const Carousel = () => {
   React.useEffect(() => {
     if (!activeTab && !initedRef.current) {
       initedRef.current = true;
-      setActiveTab(new URLSearchParams(location.search).get("tab") || "all");
+      const value = new URLSearchParams(location.search).get("tab");
+      setActiveTab(value || "all");
     }
   });
 
@@ -217,7 +219,7 @@ export const Carousel = () => {
               "section__panel",
               key === activeTab ? "" : "section__panel_hidden",
             ].join(" ")}
-            aria-hidden={key === activeTab ? "false" : "true"}
+            aria-hidden={key === activeTab ? false : true}
             id={`panel_${key}`}
             aria-labelledby={`tab_${key}`}
           >

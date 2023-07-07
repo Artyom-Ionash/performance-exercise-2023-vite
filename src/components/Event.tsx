@@ -6,7 +6,7 @@ export const Event: React.FC<{
   onSize?: (width: number) => void;
   title: string;
   subtitle?: string;
-  slim: boolean;
+  slim?: boolean;
 }> = (props) => {
   const ref = React.useRef<HTMLLIElement>(null);
 
